@@ -498,18 +498,21 @@
 
   var poller = null;
   var watchdog = null;
-  function tryNextDevice() {
+  function tryNextDevice()
+  {
     device = potentialDevices.shift();
     if (!device) return;
 
     device.open({ stopBits: 0, bitRate: 57600, ctsFlowControl: 0 });
     console.log('Attempting connection with ' + device.id);
-    device.set_receive_handler(function(data) {
+    device.set_receive_handler(function (data)
+    {
       var inputData = new Uint8Array(data);
       processInput(inputData);
     });
 
-    poller = setInterval(function() {
+    console.log(inputData);
+    poller = setInterval(function () {
       queryFirmware();
     }, 1000);
 
