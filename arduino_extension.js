@@ -229,6 +229,8 @@
   {
     for (var i = 0; i < inputData.length; i++)
     {
+        console.log('Input byte: ' + inputData[i]);
+
         if (parsingSysex)
         {
             if (inputData[i] == END_SYSEX)
