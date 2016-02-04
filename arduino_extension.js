@@ -538,19 +538,21 @@
       var inputData = new Uint8Array(data);
       processInput(inputData);
     });
+    connected = true;
+    setTimeout(init, 200);
 
-    poller = setInterval(function () {
-      queryFirmware();
-    }, 500);
+    //poller = setInterval(function () {
+    //  queryFirmware();
+    //}, 500);
 
-    watchdog = setTimeout(function() {
-      clearInterval(poller);
-      poller = null;
-      device.set_receive_handler(null);
-      device.close();
-      device = null;
-      tryNextDevice();
-    }, 10000);
+    //watchdog = setTimeout(function() {
+    //  clearInterval(poller);
+    //  poller = null;
+    //  device.set_receive_handler(null);
+    //  device.close();
+    //  device = null;
+    //  tryNextDevice();
+    //}, 10000);
   }
 
   ext._shutdown = function() {
