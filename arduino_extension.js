@@ -541,7 +541,7 @@
 
     poller = setInterval(function () {
       queryFirmware();
-    }, 10000);
+    }, 500);
 
     watchdog = setTimeout(function() {
       clearInterval(poller);
@@ -550,7 +550,7 @@
       device.close();
       device = null;
       tryNextDevice();
-    }, 20000);
+    }, 10000);
   }
 
   ext._shutdown = function() {
