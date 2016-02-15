@@ -225,11 +225,16 @@
     }
   }
 
-  function processInput(inputData) { 
-    for (var i=0; i < inputData.length; i++) {
-      
-      if (parsingSysex) {
-        if (inputData[i] == END_SYSEX) {
+  function processInput(inputData)
+  {
+    for (var i = 0; i < inputData.length; i++)
+    {
+        console.log('Input byte: ' + inputData[i]);
+
+        if (parsingSysex)
+        {
+            if (inputData[i] == END_SYSEX)
+            {
                 parsingSysex = false;
                 processSysexMessage();
             }
@@ -533,19 +538,21 @@
       var inputData = new Uint8Array(data);
       processInput(inputData);
     });
+    connected = true;
+    setTimeout(init, 200);
 
-    poller = setInterval(function() {
-      queryFirmware();
-    }, 1000);
+    //poller = setInterval(function () {
+    //  queryFirmware();
+    //}, 500);
 
-    watchdog = setTimeout(function() {
-      clearInterval(poller);
-      poller = null;
-      device.set_receive_handler(null);
-      device.close();
-      device = null;
-      tryNextDevice();
-    }, 5000);
+    //watchdog = setTimeout(function() {
+    //  clearInterval(poller);
+    //  poller = null;
+    //  device.set_receive_handler(null);
+    //  device.close();
+    //  device = null;
+    //  tryNextDevice();
+    //}, 10000);
   }
 
   ext._shutdown = function() {
