@@ -79,20 +79,15 @@
 
   var hwList = new HWList();
 
-  function HWList()
-  {
+  function HWList() {
     this.devices = [];
 
-    this.add = function (dev, pin)
-    {
+    this.add = function(dev, pin) {
       var device = this.search(dev);
-      if (!device)
-      {
+      if (!device) {
         device = {name: dev, pin: pin, val: 0};
         this.devices.push(device);
-      }
-      else
-      {
+      } else {
         device.pin = pin;
         device.val = 0;
       }
@@ -210,8 +205,7 @@
         }, 100);
         break;
       case QUERY_FIRMWARE:
-        if (!connected)
-        {
+        if (!connected) {
             clearInterval(poller);
             poller = null;
             clearTimeout(watchdog);
@@ -232,20 +226,13 @@
         if (inputData[i] == END_SYSEX) {
                 parsingSysex = false;
                 processSysexMessage();
-            }
-            else
-            {
+        } else {
                 storedInputData[sysexBytesRead++] = inputData[i];
             }
-        }
-        else if (waitForData > 0 && inputData[i] < 0x80)
-        {
+      } else if (waitForData > 0 && inputData[i] < 0x80) {
             storedInputData[--waitForData] = inputData[i];
-
-            if (executeMultiByteCommand !== 0 && waitForData === 0)
-            {
-                switch (executeMultiByteCommand)
-                {
+        if (executeMultiByteCommand !== 0 && waitForData === 0) {
+          switch(executeMultiByteCommand) {
                     case DIGITAL_MESSAGE:
                         setDigitalInputs(multiByteChannel, (storedInputData[0] << 7) + storedInputData[1]);
                     break;
@@ -259,21 +246,14 @@
                     break;
                 }
             }
-        }
-        else
-        {
-            if (inputData[i] < 0xF0)
-            {
+      } else {
+        if (inputData[i] < 0xF0) {
                 command = inputData[i] & 0xF0;
                 multiByteChannel = inputData[i] & 0x0F;
-            }
-            else
-            {
+        } else {
                 command = inputData[i];
             }
-
-            switch (command)
-            {
+        switch(command) {
                 case DIGITAL_MESSAGE:
                 case ANALOG_MESSAGE:
                 case REPORT_VERSION:
@@ -521,15 +501,13 @@
 
   var poller = null;
   var watchdog = null;
-  function tryNextDevice()
-  {
+  function tryNextDevice() {
     device = potentialDevices.shift();
     if (!device) return;
 
-    device.open({ stopBits: 1, bitRate: 57600, ctsFlowControl: 0 });
+    device.open({ stopBits: 0, bitRate: 57600, ctsFlowControl: 0 });
     console.log('Attempting connection with ' + device.id);
-    device.set_receive_handler(function (data)
-    {
+    device.set_receive_handler(function(data) {
       var inputData = new Uint8Array(data);
       processInput(inputData);
     });
