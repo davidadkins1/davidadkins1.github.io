@@ -180,8 +180,9 @@
       case CAPABILITY_RESPONSE:
         for (var i = 1, pin = 0; pin < MAX_PINS; pin++) {
             while (storedInputData[i++] != 0x7F) {
-                console.log('Test ' + storedInputData[i--]);
-            pinModes[storedInputData[i-1]].push(pin);
+                pinModes[storedInputData[i - 1]].push(pin);
+                console.log('Test ' + storedInputData[i-1]);
+                console.log(' ' + pinModes[storedInputData[i - 1]]);
             i++; //Skip mode resolution
           }
           if (i == sysexBytesRead) break;
