@@ -183,6 +183,7 @@
                 pinModes[storedInputData[i - 1]].push(pin);
                 console.log('Test ' + storedInputData[i-1]);
                 console.log(' ' + pinModes[storedInputData[i - 1]]);
+                console.log(' ' + pinModes.length);
             i++; //Skip mode resolution
           }
           if (i == sysexBytesRead) break;
