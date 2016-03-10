@@ -21,6 +21,7 @@
       DIGITAL_MESSAGE = 0x90,
       START_SYSEX = 0xF0,
       END_SYSEX = 0xF7,
+      CONNECTED_TONE = 0x07,
       QUERY_FIRMWARE = 0x79,
       REPORT_VERSION = 0xF9,
       ANALOG_MESSAGE = 0xE0,
@@ -214,6 +215,10 @@
                     clearTimeout(watchdog);
                     watchdog = null;
                     connected = true;
+                    var msg = new Uint8Array([
+                    START_SYSEX, CONNECTED_TONE, END_SYSEX]);
+                    device.send(msg.buffer);
+
                     setTimeout(init, 200);
                 }
                 pinging = false;
