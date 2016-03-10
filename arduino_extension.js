@@ -206,12 +206,12 @@
         break;
       case QUERY_FIRMWARE:
         if (!connected) {
-            clearInterval(poller);
-            poller = null;
-            clearTimeout(watchdog);
-            watchdog = null;
-            connected = true;
-            setTimeout(init, 200);
+          clearInterval(poller);
+          poller = null;
+          clearTimeout(watchdog);
+          watchdog = null;
+          connected = true;
+          setTimeout(init, 200);
         }
         pinging = false;
         pingCount = 0;
@@ -224,51 +224,48 @@
       
       if (parsingSysex) {
         if (inputData[i] == END_SYSEX) {
-                parsingSysex = false;
-                processSysexMessage();
+          parsingSysex = false;
+          processSysexMessage();
         } else {
-                storedInputData[sysexBytesRead++] = inputData[i];
-            }
+          storedInputData[sysexBytesRead++] = inputData[i];
+        }
       } else if (waitForData > 0 && inputData[i] < 0x80) {
-            storedInputData[--waitForData] = inputData[i];
+        storedInputData[--waitForData] = inputData[i];
         if (executeMultiByteCommand !== 0 && waitForData === 0) {
           switch(executeMultiByteCommand) {
-                    case DIGITAL_MESSAGE:
-                        setDigitalInputs(multiByteChannel, (storedInputData[0] << 7) + storedInputData[1]);
-                    break;
-
-                    case ANALOG_MESSAGE:
-                        setAnalogInput(multiByteChannel, (storedInputData[0] << 7) + storedInputData[1]);
-                    break;
-
-                    case REPORT_VERSION:
-                        setVersion(storedInputData[1], storedInputData[0]);
-                    break;
-                }
-            }
+            case DIGITAL_MESSAGE:
+              setDigitalInputs(multiByteChannel, (storedInputData[0] << 7) + storedInputData[1]);
+              break;
+            case ANALOG_MESSAGE:
+              setAnalogInput(multiByteChannel, (storedInputData[0] << 7) + storedInputData[1]);
+              break;
+            case REPORT_VERSION:
+              setVersion(storedInputData[1], storedInputData[0]);
+              break;
+          }
+        }
       } else {
         if (inputData[i] < 0xF0) {
-                command = inputData[i] & 0xF0;
-                multiByteChannel = inputData[i] & 0x0F;
+          command = inputData[i] & 0xF0;
+          multiByteChannel = inputData[i] & 0x0F;
         } else {
-                command = inputData[i];
-            }
-        switch(command) {
-                case DIGITAL_MESSAGE:
-                case ANALOG_MESSAGE:
-                case REPORT_VERSION:
-                    waitForData = 2;
-                    executeMultiByteCommand = command;
-                break;
-
-                case START_SYSEX:
-                    parsingSysex = true;
-                    sysexBytesRead = 0;
-                break;
-            }
+          command = inputData[i];
         }
+        switch(command) {
+          case DIGITAL_MESSAGE:
+          case ANALOG_MESSAGE:
+          case REPORT_VERSION:
+            waitForData = 2;
+            executeMultiByteCommand = command;
+            break;
+          case START_SYSEX:
+            parsingSysex = true;
+            sysexBytesRead = 0;
+            break;
+        }
+      }
     }
-}
+  }
 
   function pinMode(pin, mode) {
     var msg = new Uint8Array([PIN_MODE, pin, mode]);
@@ -903,7 +900,7 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://davidadkins1.github.io/arduino_extension.js'
+    url: 'http://khanning.github.io/scratch-arduino-extension'
   };
 
   ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
