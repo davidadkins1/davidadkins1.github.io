@@ -903,7 +903,7 @@
   var descriptor = {
     blocks: blocks[lang],
     menus: menus[lang],
-    url: 'http://davidadkins1.github.io/arduino_extension'
+    url: 'http://davidadkins1.github.io'
   };
 
   ScratchExtensions.register('Arduino', descriptor, ext, {type:'serial'});
