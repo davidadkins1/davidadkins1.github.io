@@ -347,6 +347,23 @@
         device.send(msg.buffer);
     }
 
+    function runMotors(leftSpeed, rightSpeed)
+    {
+
+    }
+
+    ext.runMotors = function (direction, speed) {
+        console.log(direction)
+        console.log(speed);
+        if('forward' === direction)
+        {
+            if('medium' === speed)
+            {
+                runMotors(200, 200);
+            }
+        }
+    };
+
     ext.whenConnected = function () {
         if (notifyConnection) return true;
         return false;
@@ -559,6 +576,9 @@
           ['-'],
           [' ', 'rotate %m.servos to %n degrees', 'rotateServo', 'servo A', 180],
           [' ', 'rotate %m.servos by %n degrees', 'changeServo', 'servo A', 20],
+          ['-'],
+          ['-'],
+          ['w', 'motors direction %m.direction %m.speed speed', 'runMotors', 'forward', 'medium'],
           ['-'],
           ['h', 'when %m.buttons is %m.btnStates', 'whenButton', 'button A', 'pressed'],
           ['b', '%m.buttons pressed?', 'isButtonPressed', 'button A'],
@@ -936,7 +956,9 @@
             leds: ['led A', 'led B', 'led C', 'led D'],
             outputs: ['on', 'off'],
             ops: ['>', '=', '<'],
-            servos: ['servo A', 'servo B', 'servo C', 'servo D']
+            servos: ['servo A', 'servo B', 'servo C', 'servo D'],
+            direction: ['forward', 'reverse', 'spin left', 'spin right'],
+            speed: ['slow', 'medium', 'fast']
         },
         de: {
             buttons: ['Taste A', 'Taste B', 'Taste C', 'Taste D'],
