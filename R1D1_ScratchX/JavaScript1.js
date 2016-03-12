@@ -370,6 +370,7 @@
 
     ext.runMotors = function (direction, speed) {
         runMotors(direction, speed);
+        console.log('finished')
     };
 
     ext.whenConnected = function () {
