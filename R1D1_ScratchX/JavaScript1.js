@@ -357,12 +357,12 @@
     {
         if ('forward' === direction) {
             if ('medium' === speed) {
-                digitalWrite(9, 'off');
-                digitalWrite(8, 'on');
-                digitalWrite(11, 'off');
-                digitalWrite(10, 'off');
-                digitalWrite(13, 'on');
-                digitalWrite(12, 'off');
+                digitalWrite(9, LOW);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                digitalWrite(10, LOW);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
             }
         }
     }
