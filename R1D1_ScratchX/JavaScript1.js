@@ -21,6 +21,7 @@
       DIGITAL_MESSAGE = 0x90,
       START_SYSEX = 0xF0,
       END_SYSEX = 0xF7,
+      RUN_MOTORS = 0x01,
       CONNECTED_TONE = 0x07,
       QUERY_FIRMWARE = 0x79,
       REPORT_VERSION = 0xF9,
@@ -347,21 +348,28 @@
         device.send(msg.buffer);
     }
 
-    function runMotors(leftSpeed, rightSpeed)
+    function initMotors()
     {
 
     }
 
-    ext.runMotors = function (direction, speed) {
-        console.log(direction)
-        console.log(speed);
-        if('forward' === direction)
-        {
-            if('medium' === speed)
-            {
-                runMotors(200, 200);
+    function runMotors(direction, speed)
+    {
+        if ('forward' === direction) {
+            if ('medium' === speed) {
+                digitalWrite(9, 'off');
+                digitalWrite(8, 'on');
+                digitalWrite(11, 'off');
+                digitalWrite(10, 'off');
+                digitalWrite(13, 'on');
+                digitalWrite(12, 'off');
             }
         }
+    }
+
+
+    ext.runMotors = function (direction, speed) {
+        runMotors(direction, speed);
     };
 
     ext.whenConnected = function () {
