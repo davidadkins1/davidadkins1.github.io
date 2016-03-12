@@ -357,10 +357,10 @@
     {
         if ('forward' === direction) {
             if ('medium' === speed) {
-                analogWrite(9, 80);
+                //analogWrite(9, 80);
                 digitalWrite(8, HIGH);
                 digitalWrite(11, LOW);
-                analogWrite(10, 80);
+                //analogWrite(10, 80);
                 digitalWrite(13, HIGH);
                 digitalWrite(12, LOW);
             }
