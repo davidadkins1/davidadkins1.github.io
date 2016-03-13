@@ -370,7 +370,6 @@
 
     ext.runMotors = function (direction, speed) {
         runMotors(direction, speed);
-        console.log('finished')
     };
 
     ext.whenConnected = function () {
@@ -587,7 +586,7 @@
           [' ', 'rotate %m.servos by %n degrees', 'changeServo', 'servo A', 20],
           ['-'],
           ['-'],
-          ['w', 'motors direction %m.direction %m.speed speed', 'runMotors', 'forward', 'medium'],
+          [' ', 'motors direction %m.direction %m.speed speed', 'runMotors', 'forward', 'medium'],
           ['-'],
           ['h', 'when %m.buttons is %m.btnStates', 'whenButton', 'button A', 'pressed'],
           ['b', '%m.buttons pressed?', 'isButtonPressed', 'button A'],
