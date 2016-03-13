@@ -421,6 +421,59 @@
                 digitalWrite(12, HIGH);
             }
         }
+        else if ('spin left' === direction) {
+            if ('slow' === speed) {
+                analogWrite(9, 60);
+                digitalWrite(8, LOW);
+                digitalWrite(11, HIGH);
+                analogWrite(10, 60);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
+            }
+            else if ('medium' === speed) {
+                analogWrite(9, 80);
+                digitalWrite(8, LOW);
+                digitalWrite(11, HIGH);
+                analogWrite(10, 80);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
+            }
+            else if ('fast' === speed) {
+                analogWrite(9, 100);
+                digitalWrite(8, LOW);
+                digitalWrite(11, HIGH);
+                analogWrite(10, 100);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
+            }
+        }
+        else if ('spin right' === direction)
+        {
+            if ('slow' === speed) {
+                analogWrite(9, 60);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                analogWrite(10, 60);
+                digitalWrite(13, LOW);
+                digitalWrite(12, HIGH);
+            }
+            else if ('medium' === speed) {
+                analogWrite(9, 80);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                analogWrite(10, 80);
+                digitalWrite(13, LOW);
+                digitalWrite(12, HIGH);
+            }
+            else if ('fast' === speed) {
+                analogWrite(9, 100);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                analogWrite(10, 100);
+                digitalWrite(13, LOW);
+                digitalWrite(12, HIGH);
+            }
+        }
     }
 
 
@@ -642,7 +695,7 @@
           [' ', 'rotate %m.servos by %n degrees', 'changeServo', 'servo A', 20],
           ['-'],
           ['-'],
-          [' ', 'motors direction %m.direction %m.speed speed', 'runMotors', 'forward', 'stop'],
+          [' ', 'motors direction %m.direction speed %m.speed', 'runMotors', 'forward', 'stop'],
           ['-'],
           ['h', 'when %m.buttons is %m.btnStates', 'whenButton', 'button A', 'pressed'],
           ['b', '%m.buttons pressed?', 'isButtonPressed', 'button A'],
@@ -1021,8 +1074,8 @@
             outputs: ['on', 'off'],
             ops: ['>', '=', '<'],
             servos: ['servo A', 'servo B', 'servo C', 'servo D'],
-            direction: ['forward', 'reverse', 'spin left', 'spin right', 'stop'],
-            speed: ['slow', 'medium', 'fast']
+            direction: ['forward', 'reverse', 'spin left', 'spin right'],
+            speed: ['stop', 'slow', 'medium', 'fast']
         },
         de: {
             buttons: ['Taste A', 'Taste B', 'Taste C', 'Taste D'],
