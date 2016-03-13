@@ -355,12 +355,41 @@
 
     function runMotors(direction, speed)
     {
-        if ('forward' === direction) {
-            if ('medium' === speed) {
-                //analogWrite(9, 80);
+        if ('forward' === direction)
+        {
+            if ('slow' === speed)
+            {
+                analogWrite(9, 60);
                 digitalWrite(8, HIGH);
                 digitalWrite(11, LOW);
-                //analogWrite(10, 80);
+                analogWrite(10, 60);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
+            }
+            else if ('medium' === speed)
+            {
+                analogWrite(9, 80);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                analogWrite(10, 80);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
+            }
+            else if ('fast' === speed)
+            {
+                analogWrite(9, 100);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                analogWrite(10, 100);
+                digitalWrite(13, HIGH);
+                digitalWrite(12, LOW);
+            }
+            else if ('stop' === speed)
+            {
+                analogWrite(9, 0);
+                digitalWrite(8, HIGH);
+                digitalWrite(11, LOW);
+                analogWrite(10, 0);
                 digitalWrite(13, HIGH);
                 digitalWrite(12, LOW);
             }
@@ -586,7 +615,7 @@
           [' ', 'rotate %m.servos by %n degrees', 'changeServo', 'servo A', 20],
           ['-'],
           ['-'],
-          [' ', 'motors direction %m.direction %m.speed speed', 'runMotors', 'forward', 'medium'],
+          [' ', 'motors direction %m.direction %m.speed speed', 'runMotors', 'forward', 'stop'],
           ['-'],
           ['h', 'when %m.buttons is %m.btnStates', 'whenButton', 'button A', 'pressed'],
           ['b', '%m.buttons pressed?', 'isButtonPressed', 'button A'],
@@ -965,7 +994,7 @@
             outputs: ['on', 'off'],
             ops: ['>', '=', '<'],
             servos: ['servo A', 'servo B', 'servo C', 'servo D'],
-            direction: ['forward', 'reverse', 'spin left', 'spin right'],
+            direction: ['forward', 'reverse', 'spin left', 'spin right', 'stop'],
             speed: ['slow', 'medium', 'fast']
         },
         de: {
