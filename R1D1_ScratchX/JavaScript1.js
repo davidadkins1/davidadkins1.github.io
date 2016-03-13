@@ -355,7 +355,16 @@
 
     function runMotors(direction, speed)
     {
-        if ('forward' === direction)
+        if ('stop' === speed)
+        {
+            analogWrite(9, 0);
+            digitalWrite(8, LOW);
+            digitalWrite(11, LOW);
+            analogWrite(10, 0);
+            digitalWrite(13, LOW);
+            digitalWrite(12, LOW);
+        }
+        else if ('forward' === direction)
         {
             if ('slow' === speed)
             {
@@ -384,14 +393,32 @@
                 digitalWrite(13, HIGH);
                 digitalWrite(12, LOW);
             }
-            else if ('stop' === speed)
-            {
-                analogWrite(9, 0);
-                digitalWrite(8, HIGH);
-                digitalWrite(11, LOW);
-                analogWrite(10, 0);
-                digitalWrite(13, HIGH);
-                digitalWrite(12, LOW);
+        }
+        else if ('reverse' === direction)
+        {
+            if ('slow' === speed) {
+                analogWrite(9, 60);
+                digitalWrite(8, LOW);
+                digitalWrite(11, HIGH);
+                analogWrite(10, 60);
+                digitalWrite(13, LOW);
+                digitalWrite(12, HIGH);
+            }
+            else if ('medium' === speed) {
+                analogWrite(9, 80);
+                digitalWrite(8, LOW);
+                digitalWrite(11, HIGH);
+                analogWrite(10, 80);
+                digitalWrite(13, LOW);
+                digitalWrite(12, HIGH);
+            }
+            else if ('fast' === speed) {
+                analogWrite(9, 100);
+                digitalWrite(8, LOW);
+                digitalWrite(11, HIGH);
+                analogWrite(10, 100);
+                digitalWrite(13, LOW);
+                digitalWrite(12, HIGH);
             }
         }
     }
